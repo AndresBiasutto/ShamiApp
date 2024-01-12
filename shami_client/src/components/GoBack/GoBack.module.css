@@ -1,0 +1,12 @@
+.button{
+    margin: 0;
+    padding: .3rem;
+    border-radius: 100%;
+    width: auto;
+    height: auto;
+}
+.arrow{
+    color: white;
+    padding: 0;
+    font-size: 2rem;
+  }

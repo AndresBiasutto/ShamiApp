@@ -1,0 +1,48 @@
+.form{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+.register{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.labelInput{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    width: 310px;
+}
+.input{
+    width: 100%;
+    border: none;
+    height: 1.4rem;
+    border-radius: 1rem;
+}
+.infoHelp{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    height: 1rem;
+    margin-top: 10px;
+}
+.select{
+    width: 100%;
+    border: none;
+    height: 1.4rem;
+    border-radius: 1rem;
+}
+.signup{
+    padding: 0;
+    margin: 0;
+    height: 3rem;
+    width: 100%;
+}
