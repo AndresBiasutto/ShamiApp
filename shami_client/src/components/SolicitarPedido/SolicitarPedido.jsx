@@ -7,8 +7,12 @@ const REGISTER_URL = "/order";
 import { useEffect, useState } from "react";
 
 const SolicitarPedido = () => {
-  const { order, setOrder } = useAuth();
+  const { setOrder } = useAuth();
   const [fechaEnvio, setFechaEnvio] = useState("");
+  const [category, setCategory] = useState("");
+  const [formulario, setFormulario] = useState({
+  });
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
     const setDate = () => {
@@ -25,78 +29,23 @@ const SolicitarPedido = () => {
         ...formulario,
         sendDate: date,
       });
-
-      console.log("Nuevo estado de order:", order);
     };
 
     setDate();
-  }, [order]);
+  }, []);
 
   useEffect(() => {
     const getProducts = async () => {
       try {
-        const response = await axios.get("/products");
-        console.log(response.data);
+        const response = (await axios.get("/products")).data;
+
+        setProducts(response);
       } catch (error) {
         console.error(error);
       }
     };
-
     getProducts();
-
   }, []);
-
-  
-  const [category, setCategory] = useState("");
-  const [formulario, setFormulario] = useState({
-    ternera: "",
-    cordero: "",
-    pollo: "",
-    mutabal: "",
-    homus: "",
-    empanadascarne: "",
-    empanadasqueso: "",
-    empanadaspicante: "",
-    empanadasverdura: "",
-    kepefrito: "",
-    kepeasado: "",
-    lahmuyin: "",
-    yabras: "",
-    mayonesaajo: "",
-    yogurt: "",
-    salsapicante: "",
-    granada: "",
-    mamulnuez: "",
-    mamulcoco: "",
-    mamuldatiles: "",
-    baklawa: "",
-    kadaef: "",
-    namura: "",
-    cesamob: "",
-    cesamon: "",
-    queso: "",
-    aceiteoliva: "",
-    aceitegirasol: "",
-    nueces: "",
-    aceitunas: "",
-    papelshawarma: "",
-    potecremas: "",
-    servilletas: "",
-    potesalsas: "",
-    potedulces: "",
-    bolsachicas: "",
-    bolsasgrandes: "",
-    bandejaschicas: "",
-    bandejasmedianas: "",
-    bandejasgrandes: "",
-    guantes: "",
-    pita: "",
-    pan: "",
-    grasa: "",
-    trigo: "",
-    falafel: "",
-    sendDate: "",
-  });
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -114,9 +63,7 @@ const SolicitarPedido = () => {
       date: fechaEnvio,
     });
     setOrder(formulario);
-    console.log("Formulario enviado:", formulario);
-    console.log("orden:", order);
-    console.log("fecha:", fechaEnvio);
+    console.log(formulario);
     try {
       const newOrder = {
         ternera: formulario.ternera,
@@ -167,30 +114,27 @@ const SolicitarPedido = () => {
         falafel: formulario.falafel,
         sendDate: formulario.sendDate,
       };
-      console.log(JSON.stringify(newOrder));
-      const response = await axios.post(REGISTER_URL, JSON.stringify(newOrder), {
-        headers: { "Content-Type": "application/json" },
-        credentials: "true",
-      });
+      const response = await axios.post(
+        REGISTER_URL,
+        JSON.stringify(newOrder),
+        {
+          headers: { "Content-Type": "application/json" },
+          credentials: "true",
+        }
+      );
 
-      console.log(response.data);
       console.log(response);
     } catch (error) {
       console.log(error);
     }
   };
+  const filteredProducts = category
+  ? products.filter((product) => product.category.name === category)
+  : products;
+
   return (
     <section className={styles.sp}>
-      {/*<div>
-        hol
-        <ul>
-          {products?.map((prod, i) => (
-            <li key={i}> {prod.name} </li>
-          ))}
-        </ul>
-      </div>*/}
-
-      <label htmlFor="category"></label>
+       <label htmlFor="category"></label>
       <select
         name="category"
         value={category}
@@ -205,10 +149,58 @@ const SolicitarPedido = () => {
         <option value="salsas">salsas</option>
         <option value="semillasyfiambres">semillas y fiambres</option>
         <option value="varios">varios</option>
-      </select>
+      </select> 
 
       <form onSubmit={handleSubmit}>
-        {category === "shawarma" && (
+        { category !== "" && filteredProducts.map((product, i) => {
+            return (
+              <div key={i} className={styles.card}>
+                <label htmlFor={product.name}>{product.name}:</label>
+                <input
+                  type="number"
+                  name={product.name}
+                  min={0}
+                  value={formulario[product.name]} 
+                  onChange={handleInputChange}
+                />
+                <p>{product.storageCapacity}</p>
+              </div>
+            );
+          })}
+
+        <button type="submit">Enviar</button>
+      </form>
+    </section>
+  );
+};
+
+export default SolicitarPedido;
+
+// import axios from "../../api/axios";
+// const GET_PRODUCTS_URL = "/products";
+// const [fechaEnvio, setFechaEnvio] = useState("");
+// useEffect(() => {
+//   let isMounted = true;
+
+//   const getProducts = async () => {
+//     try {
+//       const response = await axios.get(GET_PRODUCTS_URL);
+//       isMounted && setProduct(response.data);
+//     } catch (error) {
+//       console.error(error);
+//     }
+//   };
+
+//   getProducts();
+//   return () => {
+//     isMounted = false;
+//   };
+// }, [setProduct]);
+
+// useEffect(() => {
+//   console.log(products);
+// }, [products]);
+/* {category === "shawarma" && (
           <div>
             <label htmlFor="ternera">ternera kg:</label>
             <input
@@ -663,36 +655,4 @@ const SolicitarPedido = () => {
             />
             <br />
           </div>
-        )}
-        <button type="submit">Enviar</button>
-      </form>
-    </section>
-  );
-};
-
-export default SolicitarPedido;
-
-// import axios from "../../api/axios";
-// const GET_PRODUCTS_URL = "/products";
-// const [fechaEnvio, setFechaEnvio] = useState("");
-// useEffect(() => {
-//   let isMounted = true;
-
-//   const getProducts = async () => {
-//     try {
-//       const response = await axios.get(GET_PRODUCTS_URL);
-//       isMounted && setProduct(response.data);
-//     } catch (error) {
-//       console.error(error);
-//     }
-//   };
-
-//   getProducts();
-//   return () => {
-//     isMounted = false;
-//   };
-// }, [setProduct]);
-
-// useEffect(() => {
-//   console.log(products);
-// }, [products]);
+        )} */

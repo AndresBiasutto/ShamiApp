@@ -1,14 +1,26 @@
-import useAuth from "../../hooks/useAuth";
+import { useEffect, useState } from "react";
+import axios from "../../api/axios";
+import styles from "./OrderControl.module.css";
 
 const OrderControl = () => {
-  const { order } = useAuth();
+  const [pedidos, setPedidos]=useState([])
+  useEffect(() => {
+    const getProducts = async () => {
+      try {
+        const response = (await axios.get("/products")).data;
+
+        setPedidos(response);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getProducts();
+  }, []);
   return (
-    <div>
-      {order &&
-        Object.entries(order).map(([key, value]) => (
-          <p key={key}>{`${key}: ${value}`}</p>
-        ))}
-    </div>
+    <section className={styles.oc}>
+    hola
+      {console.log(pedidos)}
+    </section>
   );
 }; 
 

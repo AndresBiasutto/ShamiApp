@@ -1,8 +1,16 @@
 .sp{
-    height: 100vh;
+    padding-top: 4rem;
+    min-height: 100vh;
+    height: 100%;
     width: 100vw;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.card{
+    display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
 }
