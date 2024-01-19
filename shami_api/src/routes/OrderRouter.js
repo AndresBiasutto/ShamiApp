@@ -1,11 +1,11 @@
 const { Router } = require("express");
 const OrdersRouter = Router();
-const {createOrderHandler} = require("../Handlers/OrderHandler")
+const {createOrderHandler, getOrdersHandler, UpdateOrderByIdHandler} = require("../Handlers/OrderHandler")
 
-// OrdersRouter.get("/", getOrdersHandler);
+ OrdersRouter.get("/", getOrdersHandler);
 // OrdersRouter.get("/:orderId", getOrderByIdHandler);
 OrdersRouter.post("/",  createOrderHandler);
-// OrdersRouter.put("/:orderId",  UpdateOrderByIdHandler);
+ OrdersRouter.put("/:orderId",  UpdateOrderByIdHandler);
 // OrdersRouter.delete("/:orderId", deleteOrderByIdHandler);
 
 

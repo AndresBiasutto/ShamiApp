@@ -9,6 +9,7 @@ import FactoryNotifications from "./components/FactoryNotifications/FactoryNotif
  import { useLocation } from "react-router-dom";
 import Header from "./components/Header/Header";
 import useAuth from "./hooks/useAuth";
+import OrderUpdate from "./components/OrderUpdate/OrderUpdate";
 
 function App() {
    const location= useLocation()
@@ -40,11 +41,15 @@ function App() {
         <Route element={<RequireAuth allowedRoles={["manager"]} />}>
           <Route path="/manager" element={<Manager />} />
         </Route>
+
         <Route element={<RequireAuth allowedRoles={["manager", "admin"]} />}>
           <Route path="/solicitarpedido" element={<SolicitarPedido />} />
         </Route>
         <Route element={<RequireAuth allowedRoles={["manager", "admin"]} />}>
           <Route path="/ordercontrol" element={<OrderControl />} />
+        </Route>
+        <Route element={<RequireAuth allowedRoles={["manager"]} />}>
+          <Route path="/ordercontrol/orderupdate" element={<OrderUpdate />} />
         </Route>
         <Route element={<RequireAuth allowedRoles={["factory"]} />}>
           <Route path="/factorynotifications" element={<FactoryNotifications />} />
