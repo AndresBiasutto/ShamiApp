@@ -52,7 +52,6 @@ const OrderUpdate = () => {
             <p>{item.category} </p>
           </div>
         ))}
-        {console.log(updatedOrder)}
         <button type="button" onClick={handleUpdateOrder}>
           modificar
         </button>
