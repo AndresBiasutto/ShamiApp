@@ -1,5 +1,6 @@
 const getUser = require("../controllers/User/getUser");
 const newUser = require("../controllers/User/newUser");
+const deleteUserById = require("../controllers/User/deleteUserById")
 
 const getUserHandler = async (req, res) => {
     try {
@@ -20,8 +21,18 @@ const postUserHandler = async (req, res)=> {
       res.status(404).json({ error: error.message });
     }
 }
+const deleteUserHandler = async (req, res) => {
+  const userId = req.params.userId;
+  try {
+      const deletedUser = await deleteUserById(userId);
+      res.status(200).json(deletedUser);
+  } catch (error) {
+      res.status(404).json({ error: error.message });
+  }
+}
 
   module.exports = {
     getUserHandler,
-    postUserHandler
+    postUserHandler,
+    deleteUserHandler
   };

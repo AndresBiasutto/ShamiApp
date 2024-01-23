@@ -4,7 +4,7 @@ require("dotenv").config();
 
 const signIn = async (email, password) => {
   const SECRET = process.env.SECRET;
-  const userFound = await User.findOne({ email }).populate("roles");
+  const userFound = await User.findOne({ email }).populate("roles").populate("store");
 
   if (!userFound) {
     return { message: "usuario no encontrado" };
@@ -21,7 +21,8 @@ const signIn = async (email, password) => {
      username: userFound.username,
      email: userFound.email,
      roles: userFound.roles[0].name,
-     token: token
+     token: token,
+     store: userFound.store
    }
   return response;
 };

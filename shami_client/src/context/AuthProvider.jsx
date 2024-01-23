@@ -6,7 +6,6 @@ export const AuthProvider= ({children})=>{
     const [auth, setAuth]= useState({});
     const [products, setProduct]= useState([])
     const [orderState, setOrderState]= useState({})
-    const [orderID, setOrderId]= useState("")
 
     const logOut = () => {
         // Aquí puedes realizar las acciones necesarias para cerrar sesión,
@@ -15,7 +14,7 @@ export const AuthProvider= ({children})=>{
       };
 
     return(
-        <AuthContext.Provider value={{auth, setAuth, logOut, products, setProduct, orderState, setOrderState ,orderID, setOrderId}}>
+        <AuthContext.Provider value={{auth, setAuth, logOut, products, setProduct, orderState, setOrderState}}>
             {children}
         </AuthContext.Provider>
     )

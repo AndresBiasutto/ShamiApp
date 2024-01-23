@@ -1,34 +1,14 @@
 import styles from "./SolicitarPedido.module.css";
 import axios from "../../api/axios";
 import { useEffect, useState } from "react";
+import useAuth from "../../hooks/useAuth";
 const REGISTER_URL = "/order";
-
-
 
 const SolicitarPedido = () => {
   const [category, setCategory] = useState("");
-  const [formulario, setFormulario] = useState({
-  });
+  const [formulario, setFormulario] = useState({});
   const [products, setProducts] = useState([]);
-
-  useEffect(() => {
-    const setDate = () => {
-      const fechaActual = new Date();
-      const day = fechaActual.getDate();
-      const month = fechaActual.getMonth() + 1;
-      const year = fechaActual.getFullYear();
-      const dateOptions = { weekday: "long" };
-      const dayName = fechaActual.toLocaleDateString("es-ES", dateOptions);
-      const date = `${dayName} ${day}/${month}/${year}`;
-
-      setFormulario({
-        ...formulario,
-        sendDate: date,
-      });
-    };
-
-    setDate();
-  }, []);
+  const {auth}= useAuth()
 
   useEffect(() => {
     const getProducts = async () => {
@@ -36,7 +16,6 @@ const SolicitarPedido = () => {
         const response = (await axios.get("/products")).data;
 
         setProducts(response);
-        console.log(products);
       } catch (error) {
         console.error(error);
       }
@@ -49,8 +28,8 @@ const SolicitarPedido = () => {
     setFormulario({
       ...formulario,
       [name]: value,
-  })
-}
+    });
+  };
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -59,7 +38,7 @@ const SolicitarPedido = () => {
     });
     const formatedForm = Object.entries(formulario).map(([key, value]) => {
       const product = products.find((p) => p.name === key);
-  
+
       if (product) {
         return {
           name: key,
@@ -70,29 +49,30 @@ const SolicitarPedido = () => {
       }
       return null; // handle the case where the product is not found
     });
+    const finalForm = formatedForm.filter((item) => item !== null);
+    const final= {
+      store: auth.store,
+      order: finalForm
+    }
+
     try {
-      const response = await axios.post(
-        REGISTER_URL,
-        JSON.stringify(formatedForm.filter((item) => item !== null)),
-        {
-          headers: { "Content-Type": "application/json" },
-          credentials: "true",
-        }
-      );
-  
-      console.log(formatedForm);
+      const response = await axios.post(REGISTER_URL, final, {
+        headers: { "Content-Type": "application/json" },
+        credentials: "true",
+      });
+
       console.log(response);
     } catch (error) {
       console.log(error);
     }
   };
   const filteredProducts = category
-  ? products.filter((product) => product.category.name === category)
-  : products;
+    ? products.filter((product) => product.category.name === category)
+    : products;
 
   return (
     <section className={styles.sp}>
-       <label htmlFor="category"></label>
+      <label htmlFor="category"></label>
       <select
         name="category"
         value={category}
@@ -107,10 +87,11 @@ const SolicitarPedido = () => {
         <option value="salsas">salsas</option>
         <option value="semillasyfiambres">semillas y fiambres</option>
         <option value="varios">varios</option>
-      </select> 
+      </select>
 
       <form onSubmit={handleSubmit}>
-        { category !== "" && filteredProducts.map((product, i) => {
+        {category !== "" &&
+          filteredProducts.map((product, i) => {
             return (
               <div key={i} className={styles.card}>
                 <label htmlFor={product.name}>{product.name}:</label>
@@ -118,7 +99,7 @@ const SolicitarPedido = () => {
                   type="number"
                   name={product.name}
                   min={0}
-                  value={formulario[product.name]} 
+                  value={formulario[product.name]}
                   onChange={handleInputChange}
                 />
                 <p>{product.storageCapacity}</p>

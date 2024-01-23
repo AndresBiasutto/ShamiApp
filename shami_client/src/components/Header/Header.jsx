@@ -10,7 +10,10 @@ const Header = () => {
   const { auth, logOut } = useAuth();
   const role = auth?.roles;
   const name = auth?.username;
+  const store= auth?.store;
   const location = useLocation();
+
+
 
   const handleLogout = () => {
     // Llama a la función de logout del contexto de autenticación
@@ -20,8 +23,9 @@ const Header = () => {
     <header className={styles.header}>
       <img className={styles.logo} src={logo} />
       <div className={styles.info}>
-        <p className={styles.p}>Rol: {role} </p>
         <p className={styles.p}>nombre: {name} </p>
+        {store && <p className={styles.p}>tienda: {store} </p>}
+        <p className={styles.p}>Rol: {role} </p>
       </div>
       <div className={styles.buttons}>
         {location.pathname !== "/" && <GoBack />}

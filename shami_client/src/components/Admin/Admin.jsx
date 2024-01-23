@@ -9,7 +9,7 @@ const Admin = () => {
       <nav className={styles.nav}>
         <Link className={styles.button} to="register" >Agregar usuario</Link>
         <Link className={styles.button} to="users" >Lista de usuarios</Link>
-        <Link className={styles.button} to="movements" >Ver actividad</Link>
+        <Link className={styles.button} to="adminordercontrol" >Historial de Pedidos</Link>
       </nav>
     </section>
   );

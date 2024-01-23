@@ -18,7 +18,6 @@ const Users = () => {
         const response = await axios.get("/user", {
           signal: controller.signal,
         });
-        console.log(response.data);
         isMounted && setUsers(response.data);
       } catch (error) {
         console.error(error);
@@ -30,8 +29,17 @@ const Users = () => {
       isMounted = false;
       controller.abort();
     };
-  }, []);
+  }, [users]);
 
+  const handleDelete= async (id)=>{
+    try {
+      const response = await axios.delete(`/user/${id}`);
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+      console.log(id);
+  }
   return (
     <section className={styles.users}>
       <h2>Users List</h2>
@@ -46,7 +54,7 @@ const Users = () => {
                 <p className={styles.p} >local: {user?.store?.name}</p>
                 <div className={styles.buttonPannel} >
                   <button className={styles.update} ><MdDriveFileRenameOutline /></button>
-                  <button className={styles.delete} ><RiDeleteBinLine /></button>
+                  <button className={styles.delete} onClick={()=> handleDelete(user?._id)} ><RiDeleteBinLine /></button>
                 </div>
               </div>
             </li>

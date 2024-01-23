@@ -10,6 +10,7 @@ import FactoryNotifications from "./components/FactoryNotifications/FactoryNotif
 import Header from "./components/Header/Header";
 import useAuth from "./hooks/useAuth";
 import OrderUpdate from "./components/OrderUpdate/OrderUpdate";
+import AdminOrderControl from "./components/AdminOrderControl/AdminOrderControl";
 
 function App() {
    const location= useLocation()
@@ -28,6 +29,9 @@ function App() {
         {/* Rutas protegidas */}
         <Route element={<RequireAuth allowedRoles={["admin"]} />}>
           <Route path="admin" element={<Admin />} />
+        </Route>
+        <Route element={<RequireAuth allowedRoles={["admin"]} />}>
+          <Route path="adminordercontrol" element={<AdminOrderControl />} />
         </Route>
         <Route element={<RequireAuth allowedRoles={["admin"]} />}>
           <Route path="register" element={<Register />} />
