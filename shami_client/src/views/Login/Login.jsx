@@ -2,8 +2,8 @@ import { useRef, useState, useEffect } from "react";
 import useAuth from "../../hooks/useAuth";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "../../api/axios";
-import styles from "./Login.module.css"
-import logo from "../../assets/logo_completo.png"
+import styles from "./Login.module.css";
+import logo from "../../assets/logo_completo.png";
 
 const LOGIN_URL = "/auth/signin";
 
@@ -19,6 +19,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errMsg, setErrMsg] = useState(false);
+  const [loginSuccess, setLoginSuccess] = useState(false); 
 
   useEffect(() => {
     userRef.current.focus();
@@ -40,7 +41,6 @@ const Login = () => {
           credentials: true,
         }
       );
-      console.log(JSON.stringify(response?.data));
 
       const token = response?.data?.token;
       const roles = response?.data?.roles;
@@ -50,10 +50,14 @@ const Login = () => {
       setAuth({ e_mail, username, roles, token, store });
       setEmail("");
       setPassword("");
-      navigate(from, {replace: true})
+      setLoginSuccess(true); // Marcar el inicio de sesión como exitoso
+      setTimeout(() => {
+        navigate(from, { replace: true });
+      }, 1000); 
     } catch (error) {
       setErrMsg("login failed");
       errRef.current.focus();
+      setLoginSuccess(false); 
     }
   };
 
@@ -66,8 +70,9 @@ const Login = () => {
       >
         {errMsg}
       </p>
-      <img src={logo} className={styles.logo} />
-      <form className={styles.form} onSubmit={handleSubmit}>
+
+      <form className={`${styles.form} ${loginSuccess ? styles.goUp : styles.goDown}`} onSubmit={handleSubmit}>
+        <img src={logo} className={styles.logo} />
         <label htmlFor="email">Email</label>
         <input
           type="text"
@@ -87,9 +92,9 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
           value={password}
           required
-          className={styles.input}
+          className={ styles.input}
         />
-        <button className={styles.signIn} >Sign in</button>
+        <button className={styles.signIn}>Ingresar</button>
       </form>
     </section>
   );

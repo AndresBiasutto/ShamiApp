@@ -56,12 +56,11 @@ const SolicitarPedido = () => {
     }
 
     try {
-      const response = await axios.post(REGISTER_URL, final, {
+       await axios.post(REGISTER_URL, final, {
         headers: { "Content-Type": "application/json" },
         credentials: "true",
       });
 
-      console.log(response);
     } catch (error) {
       console.log(error);
     }

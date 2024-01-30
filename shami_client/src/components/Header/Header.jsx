@@ -5,40 +5,53 @@ import useAuth from "../../hooks/useAuth";
 import styles from "./Header.module.css";
 import GoBack from "../GoBack/GoBack";
 import { useLocation } from "react-router-dom";
+import { useState } from "react";
 
 const Header = () => {
   const { auth, logOut } = useAuth();
   const role = auth?.roles;
   const name = auth?.username;
-  const store= auth?.store;
+  const store = auth?.store;
   const location = useLocation();
-
-
+  const [toggle, setToggle] = useState(false);
 
   const handleLogout = () => {
     // Llama a la función de logout del contexto de autenticación
     logOut();
   };
+
+  const handleToggle = () => {
+    setToggle(!toggle)
+  };
+
   return (
-    <header className={styles.header}>
+    <header className={`${styles.header} ${role === "admin"? styles.admin : role === "factory"? styles.factory : styles.manager}` }>
       <img className={styles.logo} src={logo} />
-      <div className={styles.info}>
-        <p className={styles.p}>nombre: {name} </p>
-        {store && <p className={styles.p}>tienda: {store} </p>}
-        <p className={styles.p}>Rol: {role} </p>
-      </div>
+
       <div className={styles.buttons}>
         {location.pathname !== "/" && <GoBack />}
-        <button className={styles.button}>
+        <button onClick={handleToggle} className={styles.button}>
           <BsGear className={styles.bsgear} />
         </button>
-        <button className={styles.button} onClick={handleLogout}>
-          <GoSignOut
-            className={styles.bsgear}
-            title="Salir de la app"
-            logout="true"
-          />
-        </button>
+
+        <div
+          className={`${styles.modal} ${toggle ? styles.show : styles.hide}`}
+        >
+          <div className={styles.info}>
+            <p className={styles.p}>nombre: {name} </p>
+            {store && <p className={styles.p}>tienda: {store} </p>}
+            <p className={styles.p}>Rol: {role} </p>
+            <button className={styles.settings}>settings</button>
+          </div>
+
+          <button className={styles.button} onClick={handleLogout}>
+            <GoSignOut
+              className={styles.bsout}
+              title="Salir de la app"
+              logout="true"
+            />
+          </button>
+        </div>
       </div>
     </header>
   );

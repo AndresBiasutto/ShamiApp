@@ -9,7 +9,6 @@ const OrderDetail = (props) => {
   const { setOrderState } = useAuth();
   const fechaEmision = new Date(order?.createdAt);
   const diasHastaProximoJueves = (4 - fechaEmision?.getDay() + 7) % 7;
-
   const proximoJueves = new Date(fechaEmision);
   proximoJueves.setDate(fechaEmision?.getDate() + diasHastaProximoJueves);
   const fechaActual = new Date();
@@ -52,9 +51,9 @@ const OrderDetail = (props) => {
             modificar order
           </Link>
         </div>
-      ) : (
-        "no hay pedidos"
-      )}
+      ) : 
+      <p>no hay pedidos</p>  
+      }
     </section>
   );
 };

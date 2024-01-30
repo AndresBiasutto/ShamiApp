@@ -1,0 +1,50 @@
+.oc{
+    margin-top: 100px;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.orderHeader{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 2cm;
+}
+.logo{
+    width: 200px;
+}
+.order{
+    background-color: var(--blanco);
+    width: 21cm;
+    height: 30cm;
+    padding: 2cm;
+}
+.info{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    border: 5px double var(--negro);
+    padding: .2cm;
+}
+.pInfo{
+    line-height: .01;
+}
+.item{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.itemInfo{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 7cm;
+    gap: 1cm;
+}

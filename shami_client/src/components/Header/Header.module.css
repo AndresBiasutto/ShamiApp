@@ -1,46 +1,131 @@
 .header {
   z-index: 1000;
-    background-color: red;
-    position: fixed;
+  position: fixed;
+  left: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 10px;
+  padding-right: 10px;
+ 
+  animation-name: headerOn;
+  animation-duration: .5s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+}
+.admin{
+  background-color: var(--naranja);
+}
+.factory{
+  background-color: var(--amarillo);
+}
+.manager{
+  background-color: var(--verde);
+}
+@keyframes headerOn {
+  0%{
+    top: -100px;
+    filter: blur(10px);
+  }
+  100%{
     top: 0;
-    left: 0;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-    background: rgb(18,1,1);
-  background: linear-gradient(180deg, rgba(18,1,1,1) 51%, rgba(43,0,0,0.10425420168067223) 100%);
+    ilter: blur(0);
   }
-  .logo {
-    height: 3em;
+}
+.logo {
+  height: 2.5em;
+}
+.button {
+  margin: 10px 0;
+  padding: 0.3rem;
+  border-radius: 100%;
+  width: auto;
+  height: auto;
+  border: 2px solid var(--blanco);
+  transition: all .5s ease-out;
+}
+.button:hover{
+  transform: rotate(45deg);
+  border-color: var(--blanco);
+}
+.bsgear {
+  color: var(--blanco);
+  padding: 0;
+  font-size: 2rem;
+}
+.bsout {
+  color: black;
+  padding: 0;
+  font-size: 2rem;
+}
+.info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+.settings {
+  border-color: black;
+  color: black;
+  font-size: large;
+}
+.p {
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+  color: black;
+  font-size: large;
+}
+.buttons {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  gap: 10px;
+}
+.modal {
+  background-color: rgb(251, 234, 234);
+  height: 85vh;
+  width: 50vw;
+  position: absolute;
+  border-radius: 10px;
+  border: 4px solid white;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 10px;
+}
+.show {
+  top: 4.2rem;
+  right: 0rem;
+  transition: all ease-in-out 0.3s;
+  opacity: 1;
+}
+.hide {
+  top: 4.2rem;
+  right: -100rem;
+  transition: all ease-in-out 0.3s;
+  opacity: 0
+}
+
+
+@media (max-width: 575.98px) {
+  .header{
+    height: 100px;
+  }.modal{
+    width: 95vw;
   }
-  .button{
-    margin: 0;
-    padding: .3rem;
-    border-radius: 100%;
-    width: auto;
-    height: auto;
+  .show {
+    top: 6rem;
+
   }
-  .bsgear{
-    color: white;
-    padding: 0;
-    font-size: 2rem;
+  .hide {
+    top: 6rem;
+
   }
-  .info{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    margin: 0;
-    padding: 0;
-  }
-  .p{
-    margin: 0;
-    padding: 0;
-    line-height: 1;
-  }
-  .buttons{
-    display: flex;
-    flex-direction: row;
-  }
+}
