@@ -2,7 +2,7 @@ import FactoryDetail from "./FactoryDetail/FactoryDetail";
 import { useEffect, useState } from "react"
 import axios from "../../api/axios"
 const FactoryNotifications = () => {
-  const [order, setOrder] = useState([]);
+  const [orders, setOrders] = useState([]);
   useEffect(() => {
     const getOrders = async () => {
       try {
@@ -17,7 +17,7 @@ const FactoryNotifications = () => {
             return true;
           }
         }); 
-        setOrder(filteredData);
+        setOrders(filteredData);
       } catch (error) {
         console.error(error);
       }
@@ -28,7 +28,7 @@ const FactoryNotifications = () => {
   return (
     <div>
           <FactoryDetail
-      order= {order}
+      orders= {orders}
     />
     </div>
   )

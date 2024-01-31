@@ -8,6 +8,9 @@ const OrderSchema = new mongoose.Schema(
     order: {
       type: Array,
     },
+    orderDelivered:{
+      type: Boolean
+    }
   },
   { timestamps: true, versionKey: false }
 );
