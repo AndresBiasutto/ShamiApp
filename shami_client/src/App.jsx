@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import { Home, Login, Register, LinkPage } from "./views/viewsIndex";
-import { Admin, Layout, Lounge, Missing, RequireAuth, Unauthorized, Users } from "./components/componentsIndex";
+import { Admin, Layout, Missing, RequireAuth, Unauthorized, Users } from "./components/componentsIndex";
 import Factory from "./components/Factory/Factory";
 import Manager from "./components/Manager/Manager";
 import OrderControl from "./components/OrderControl/OrderControl";
@@ -11,6 +11,9 @@ import Header from "./components/Header/Header";
 import useAuth from "./hooks/useAuth";
 import OrderUpdate from "./components/OrderUpdate/OrderUpdate";
 import AdminOrderControl from "./components/AdminOrderControl/AdminOrderControl";
+import AdminProducts from "./components/AdminProducts/AdminProducts";
+import CreateProduct from "./components/AdminProducts/CreateProduct/CreateProduct";
+import ModifyProduct from "./components/AdminProducts/ModifyProduct/ModifyProduct";
 
 function App() {
    const location= useLocation()
@@ -29,6 +32,15 @@ function App() {
         {/* Rutas protegidas */}
         <Route element={<RequireAuth allowedRoles={["admin"]} />}>
           <Route path="admin" element={<Admin />} />
+        </Route>
+        <Route element={<RequireAuth allowedRoles={["admin"]} />}>
+          <Route path="adminproducts" element={<AdminProducts />} />
+        </Route>
+        <Route element={<RequireAuth allowedRoles={["admin"]} />}>
+          <Route path="adminproducts/createproduct" element={<CreateProduct />} />
+        </Route>
+        <Route element={<RequireAuth allowedRoles={["admin"]} />}>
+          <Route path="adminproducts/modifyproduct" element={<ModifyProduct />} />
         </Route>
         <Route element={<RequireAuth allowedRoles={["admin"]} />}>
           <Route path="adminordercontrol" element={<AdminOrderControl />} />
@@ -61,7 +73,6 @@ function App() {
         <Route element={<RequireAuth allowedRoles={["admin", "manager", "factory"]} />}>
           <Route path="/" element={<Home />} />
         </Route>
-        <Route path="/lounge" element={<Lounge />} />
       </Route>
 
       {/* Todo lo demas */}

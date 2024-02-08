@@ -1,37 +1,33 @@
+import { useEffect, useState } from "react";
+import axios from "../../api/axios";
 import FactoryDetail from "./FactoryDetail/FactoryDetail";
-import { useEffect, useState } from "react"
-import axios from "../../api/axios"
+import filterUniqueStores from "../../utils/factoryStores";
+
 const FactoryNotifications = () => {
   const [orders, setOrders] = useState([]);
+
   useEffect(() => {
-    const getOrders = async () => {
+    const fetchOrders = async () => {
       try {
         const response = await axios.get("/order");
         const reversedOrders = response.data.slice().reverse();
-        const stores = {};
-        const filteredData = reversedOrders.filter((item) => {
-          if (stores[item.store]) {
-            return false;
-          } else {
-            stores[item.store] = true;
-            return true;
-          }
-        }); 
-        setOrders(filteredData);
+        const uniqueStores = filterUniqueStores(reversedOrders);
+        setOrders(uniqueStores);
       } catch (error) {
-        console.error(error);
+        console.error("Error fetching orders:", error);
       }
     };
-    getOrders();
-    
+
+    fetchOrders();
   }, []);
+
+
+
   return (
     <div>
-          <FactoryDetail
-      orders= {orders}
-    />
+      <FactoryDetail orders={orders} />
     </div>
-  )
-}
+  );
+};
 
-export default FactoryNotifications
+export default FactoryNotifications;

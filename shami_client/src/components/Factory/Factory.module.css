@@ -30,3 +30,19 @@
     color: white;
     border-radius: .5rem;
 }
+.span{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+.notifications{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--amarillo);
+    background-color: var(--rojo);
+    height: 40px;
+    width: 40px;
+    border-radius: 100px;
+}

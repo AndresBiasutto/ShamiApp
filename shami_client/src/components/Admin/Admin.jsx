@@ -10,6 +10,8 @@ const Admin = () => {
         <Link className={`link linkAdmin`} to="register" >Agregar usuario</Link>
         <Link className={`link linkAdmin`} to="users" >Lista de usuarios</Link>
         <Link className={`link linkAdmin`} to="adminordercontrol" >Historial de Pedidos</Link>
+        <Link className={`link linkAdmin`} to="adminproducts" >Productos</Link>
+        <Link className={`link linkAdmin`} to="adminordercontrol" >Locales</Link>
       </nav>
     </section>
   );

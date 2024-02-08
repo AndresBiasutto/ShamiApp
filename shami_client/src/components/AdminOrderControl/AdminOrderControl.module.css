@@ -33,6 +33,7 @@
 }
 .pInfo{
     line-height: .01;
+    color: var(--negro);
 }
 .item{
     display: flex;

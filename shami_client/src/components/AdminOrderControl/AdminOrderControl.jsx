@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import logo from "../../assets/logo_completo.png";
 import axios from "../../api/axios";
 import styles from "./AdminOrderControl.module.css";
+import formatDate from "../../utils/formatDate";
 
 const AdminOrderControl = () => {
   const [orders, setOrders] = useState([]);
@@ -18,16 +19,9 @@ const AdminOrderControl = () => {
     };
     getOrders();
   }, []);
-
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    const day = date.getDate();
-    const month = date.getMonth() + 1;
-    const year = date.getFullYear();
-    return `${day < 10 ? "0" + day : day}/${
-      month < 10 ? "0" + month : month
-    }/${year}`;
-  };
+useEffect(() => {
+  console.log(orders);
+}, [orders])
 
   return (
     <section className={styles.oc}>
@@ -37,6 +31,7 @@ const AdminOrderControl = () => {
             <div className={styles.orderHeader}>
               <img className={styles.logo} src={logo} />
               <div className={styles.info}>
+                <p className={styles.pInfo}>id remito: {order._id} </p>
                 <p className={styles.pInfo}>Fecha: {formatDate(order.createdAt)} </p>
                 <p className={styles.pInfo}>tienda: {order.store} </p>
               </div>
@@ -44,10 +39,10 @@ const AdminOrderControl = () => {
 
             {order.order.map((item, index) => (
               <div className={styles.item} key={index}>
-                <p>{item.name}</p>
+                <p className={styles.pInfo}>{item.name}</p>
                 <div className={styles.itemInfo}>
-                  <p>{item.amount}</p>
-                  <p>({item.storageCapacity})</p>
+                  <p className={styles.pInfo}>{item.amount}</p>
+                  <p className={styles.pInfo}>({item.storageCapacity})</p>
                 </div>
               </div>
             ))}
