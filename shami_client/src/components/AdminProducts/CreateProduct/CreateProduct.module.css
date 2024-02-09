@@ -7,8 +7,8 @@
     background-color: var(--verde);
 }
 .createProduct{
-    height: 100vh;
-    width: 50vw;
+    height: auto;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;

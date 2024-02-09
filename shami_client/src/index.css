@@ -16,6 +16,26 @@ html {
   --negro: #121212;
   font-family: "Tajawal", sans-serif;
 }
+/* Estilo para la barra de desplazamiento en general */
+::-webkit-scrollbar {
+  width: 5px; /* Ancho de la barra de desplazamiento */
+}
+
+/* Estilo para el riel de la barra de desplazamiento */
+::-webkit-scrollbar-track {
+  background: var(--negro); /* Color de fondo del riel */
+}
+
+/* Estilo para el mango de la barra de desplazamiento */
+::-webkit-scrollbar-thumb {
+  background: var(--blanco);
+  border-radius: 10px; /* Color del mango */
+}
+
+/* Estilo para el mango cuando se pasa el ratón por encima */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--naranja); /* Color del mango al pasar el ratón por encima */
+}
 section {
   background-color: transparent;
   width: 100%;
@@ -62,6 +82,17 @@ h1 {
   font-size: 3.2em;
   line-height: 1.1;
   font-family: "Tajawal", sans-serif;
+}
+h2 {
+  font-size: 3em;
+  line-height: 1.1;
+  font-family: "Tajawal", sans-serif;
+}
+h3 {
+  font-size: 2em;
+  line-height: 1.1;
+  font-family: "Tajawal", sans-serif;
+  color: var(--blanco);
 }
 
 button {

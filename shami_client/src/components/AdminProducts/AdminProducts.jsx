@@ -1,13 +1,13 @@
-import { Link } from "react-router-dom";
+
 import styles from "./AdminProducts.module.css"
 import CreateProduct from "./CreateProduct/CreateProduct";
+import GetProducts from "./GetProducts/GetProducts";
 
 const AdminProducts = () => {
   return (
     <section className={styles.AdminProducts}>
     <CreateProduct/>
-    <Link className={`link linkAdmin`} to="createproduct" >Cargar nuevo producto</Link>
-    <Link className={`link linkAdmin`} to="modifyproduct" >Modificar producto existente</Link>
+    <GetProducts/>
     </section>
   )
 }

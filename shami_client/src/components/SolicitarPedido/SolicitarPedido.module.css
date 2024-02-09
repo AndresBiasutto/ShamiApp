@@ -1,16 +1,74 @@
-.sp{
-    padding-top: 4rem;
-    min-height: 100vh;
-    height: 100%;
-    width: 100vw;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+.sp {
+  position: relative;
+  padding-top: 4rem;
+  min-height: 100vh;
+  height: 100%;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
-.card{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
+.card {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  align-items: center;
+  line-height: .5em;
+  padding: .5em;
+}
+.numInput {
+  height: 2em;
+  width: 2em;
+  background-color: var(--negro);
+  color: var(--blanco);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.numberInputContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.numButton {
+  margin: 0;
+  padding: 0;
+  height: 2em;
+  width: 2em;
+}
+.lineColor {
+  background-color: rgba(255, 255, 255, 0.192);
+  border-radius: 10px;
+}
+.modal{
+  position: fixed;
+  background-color: var(--verde);
+  top: 50vh;
+  left: 50vw;
+  height: 50vh;
+  width: 50vw;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  border: 2px solid var(--blanco);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.modalButtons{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.check{
+  color: var(--blanco);
+  font-size: 3em;
+}
+.cancel{
+  color: var(--rojo);
+  font-size: 3em;
 }

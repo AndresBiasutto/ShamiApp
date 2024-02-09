@@ -35,7 +35,23 @@ const Register = () => {
 
   const [rolSeleccionado, setRolSeleccionado] = useState("");
   const [localSeleccionado, setLocalSeleccionado] = useState("");
+  const [stores, setStores] = useState([])
 
+  useEffect(() => {
+    const fetchStores=async ()=>{
+      try {
+        const response=await axios.get("/store")
+        setStores(response.data)
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  fetchStores()
+
+  console.log(stores);
+
+  }, [])
+  
   useEffect(() => {
     nameRef.current.focus();
     nameRef.current;
@@ -57,8 +73,6 @@ const Register = () => {
 
   useEffect(() => {
     const result = PASSWORD_REGEX.test(password);
-    // console.log(result);
-    // console.log(password);
     setValidPassword(result);
     const match = password === matchPassword;
     setValidMatch(match);
@@ -223,7 +237,12 @@ const Register = () => {
                 onChange={(e) => setLocalSeleccionado(e.target.value)}
               >
                 <option value="">Selecciona un local</option>
-                <option value="65971be06898691942bc07bc">Carrefour Vicente Lopez</option>
+                {stores.map((store)=>{
+                  return (
+                    <option key={store.id} value={store._id}>{store.name} </option>
+                  )
+                })}
+                
                 <option value="65971be06898691942bc07bd">Unicenter Martinez</option>
               </select>
               {/* <p>Rol seleccionado: {localSeleccionado}</p> */}

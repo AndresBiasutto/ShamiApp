@@ -5,7 +5,7 @@ import useAuth from "../../hooks/useAuth";
 import styles from "./Header.module.css";
 import GoBack from "../GoBack/GoBack";
 import { useLocation } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Header = () => {
   const { auth, logOut } = useAuth();
@@ -14,6 +14,13 @@ const Header = () => {
   const store = auth?.store;
   const location = useLocation();
   const [toggle, setToggle] = useState(false);
+
+  useEffect(() => {
+    console.log(auth);
+  
+
+  }, [])
+  
 
   const handleLogout = () => {
     // Llama a la función de logout del contexto de autenticación
@@ -39,7 +46,7 @@ const Header = () => {
         >
           <div className={styles.info}>
             <p className={styles.p}>nombre: {name} </p>
-            {store && <p className={styles.p}>tienda: {store} </p>}
+            {store && <p className={styles.p}>tienda: {store.name} </p>}
             <p className={styles.p}>Rol: {role} </p>
             <button className={styles.settings}>settings</button>
           </div>
