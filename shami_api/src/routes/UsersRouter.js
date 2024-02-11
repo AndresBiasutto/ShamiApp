@@ -3,12 +3,13 @@ const UsersRouter = Router();
 const {
     getUserHandler,
     postUserHandler,
-    deleteUserHandler
+    deleteUserHandler,
+    putUserByIdHandler
   } = require("../Handlers/UsersHandlers");
 
 UsersRouter.get("/", getUserHandler);
 UsersRouter.post("/", postUserHandler);
-// UsersRouter.put("/", updateCLevelHandler);
+UsersRouter.put("/:userId", putUserByIdHandler);
  UsersRouter.delete("/:userId", deleteUserHandler);
 
 

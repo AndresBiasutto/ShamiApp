@@ -13,7 +13,7 @@ import OrderUpdate from "./components/OrderUpdate/OrderUpdate";
 import AdminOrderControl from "./components/AdminOrderControl/AdminOrderControl";
 import AdminProducts from "./components/AdminProducts/AdminProducts";
 import CreateProduct from "./components/AdminProducts/CreateProduct/CreateProduct";
-import ModifyProduct from "./components/AdminProducts/ModifyProduct/ModifyProduct";
+import AdminUsers from "./components/AdminUsers/AdminUsers";
 
 function App() {
    const location= useLocation()
@@ -37,10 +37,10 @@ function App() {
           <Route path="adminproducts" element={<AdminProducts />} />
         </Route>
         <Route element={<RequireAuth allowedRoles={["admin"]} />}>
-          <Route path="adminproducts/createproduct" element={<CreateProduct />} />
+          <Route path="adminusers" element={<AdminUsers />} />
         </Route>
         <Route element={<RequireAuth allowedRoles={["admin"]} />}>
-          <Route path="adminproducts/modifyproduct" element={<ModifyProduct />} />
+          <Route path="adminproducts/createproduct" element={<CreateProduct />} />
         </Route>
         <Route element={<RequireAuth allowedRoles={["admin"]} />}>
           <Route path="adminordercontrol" element={<AdminOrderControl />} />

@@ -68,6 +68,7 @@ const CreateProduct = () => {
 
   return (
     <section className={styles.createProduct}>
+    <h3>Agregar un producto</h3>
       <form onSubmit={(e) => handleSend(e)}>
         <div>
           <label htmlFor="productName">Nombre del producto</label>

@@ -1,17 +1,21 @@
 .form{
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-}
-.register{
-    width: 100vw;
-    height: 100vh;
+    height: 80vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    background-color: var(--negro);
+    padding: 10px;
+    border-radius: 10px;
+}
+.register{
+    width:auto;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
 }
 .labelInput{
     display: flex;
@@ -45,4 +49,42 @@
     margin: 0;
     height: 3rem;
     width: 100%;
+    background-color: var(--verde);
+}
+.disabled{
+    background-color: gray;
+    color: darkgray;
+}
+.modaltrue{
+left: 10px;
+transition: .5s all ease-out;
+}
+.modalfalse{
+left: -320px;
+transition: .5s all ease-out;
+}
+.modalButton{
+    position: absolute;
+    top: 50%;
+    right: -100px;
+    width: 80px;
+    height: 100px;
+    transform: translate(-50%, -50%);
+    background-color: #5b730272;
+    border: none;
+    border-radius: 0 100px 100px 0;
+    font-size: 1.1em;
+    transition: all .5s ease-out;
+    font-size: 2em;
+}
+.modalButton:hover{
+    background-color: var(--verde);
+    height: 120px;
+    right: -105px;
+}
+.modalButtonOn{
+    right: -120px;
+}
+.modalButtonOn:hover{
+    right: -120px;
 }
