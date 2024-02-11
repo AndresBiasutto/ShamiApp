@@ -8,11 +8,14 @@
     border: 2px solid var(--blanco);
     border-radius: 10px;
     overflow: scroll;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 .product{
     display: grid;
     grid-template-columns: 2fr 1fr 1fr;
     width: 100%;
+    padding-left: 10px;
 }
 .product:hover{
     border: 1px solid var(--blanco);
@@ -31,6 +34,7 @@
 }
 .lineColor{
     background-color: rgba(176, 176, 176, 0.251);
+    border-radius: 10px;
 }
 .delete{
     color: var(--rojo);
@@ -54,3 +58,33 @@ color: var(--blanco);
     background-color: var(--amarillo);
     color: var(--blanco);
     }
+.buttoncancel{
+    color: #fd5353;
+    border-radius: 100px;
+    border-color: #fd5353;
+    font-size: 1.2em;
+    padding: 0;
+    height: 2em;
+    width: 2em;
+}
+.buttoncancel:hover{
+    background-color: #fd5353;
+    color: var(--blanco);
+}
+.buttoncheck{
+    color: #379e5d;
+    border-radius: 100px;
+    border-color: #379e5d;
+    font-size: 1.2em;
+    padding: 0;
+    height: 2em;
+    width: 2em;
+}
+.buttoncheck:hover{
+    background-color:#379e5d;
+    color: var(--blanco);
+}
+.updateProdInput{
+    background-color: var(--negro);
+    color: var(--blanco);
+}

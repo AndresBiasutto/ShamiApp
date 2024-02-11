@@ -1,5 +1,6 @@
 import axios from "../../../api/axios";
 import styles from "./CreateProduct.module.css"
+import useAuth from "../../../hooks/useAuth";
 import { useState, useEffect } from "react";
 
 const CreateProduct = () => {
@@ -8,8 +9,8 @@ const CreateProduct = () => {
   const [productPrice, setProductPrice] = useState("");
   const [productImgURL, setProductImgURL] = useState("");
   const [productStorageCapacity, setProductStorageCapacity] = useState("");
-
   const [categories, setCategories] = useState([])
+  const { setProduct}= useAuth()
 
   useEffect( () => {
     const fetchCategories= async ()=>{
@@ -24,6 +25,15 @@ const CreateProduct = () => {
   fetchCategories()
 
   }, [])
+
+  const fetchProducts= async ()=>{
+    try {
+      const response =await axios.get("/products");
+      setProduct(response.data)
+    } catch (error) {
+      console.log(error);
+    }      
+  }
 
   const formReady=()=>{
     if ( productName !== "" && productCategory !== "" && productStorageCapacity !== "" ) {
@@ -42,13 +52,15 @@ const CreateProduct = () => {
         imgURL: productImgURL,
         storageCapacity: productStorageCapacity,
       };
-      console.log(newProduct);
-      const response = await axios.post("products", newProduct, {
+      await axios.post("products", newProduct, {
         headers: { "Content-Type": "application/json" },
         credentials: "true",
       });
-
-      console.log("Product created:", response.data);
+  
+      // Después de crear el producto, actualiza la lista de productos
+      fetchProducts();
+  
+      console.log("Product created successfully");
     } catch (error) {
       console.log("Error creating product:", error);
     }
