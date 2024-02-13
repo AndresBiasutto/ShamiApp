@@ -7,7 +7,7 @@ import axios from "../../api/axios";
 const UserSettings = () => {
   const [Image, setImage] = useState("");
   const [ContactNumber, setContactNumber] = useState("");
-  const [Users, setUsers] = useState([])
+  const [User, setUser] = useState([])
   const [userData, setuserData] = useState({})
   const { auth } = useAuth();
   const [userId, setUserId] = useState(null);
@@ -15,14 +15,14 @@ const UserSettings = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get("/user");
-        setUsers(response.data);
+        const response = await axios.get("user");
         console.log(response.data);
 
         // Buscar el usuario después de que se hayan cargado los datos de los usuarios
-        const user = response.data.find(user => user.email === auth.email);
+        const user = response.data.find(user => user.email === auth.e_mail);
         if (user) {
           setUserId(user._id);
+          setUser(user)
         }
       } catch (error) {
         console.error(error);
@@ -30,12 +30,12 @@ const UserSettings = () => {
     };
 
     fetchUsers();
-  }, [auth.email]);
+  }, [  auth.e_mail]);
 
   const handleUpdate = async (e) => {
     e.preventDefault();
     const newData = {
-      ...auth,
+      ...User,
       photo: Image,
       contactNumber: ContactNumber
     }
@@ -43,7 +43,7 @@ const UserSettings = () => {
     console.log(userData);
 
     try {
-      await axios.put(`/user/${userId}`, newData);
+      await axios.put(`/user/${userId}`, userData);
       console.log("enviado:", newData);
     } catch (error) {
       console.log(error);
