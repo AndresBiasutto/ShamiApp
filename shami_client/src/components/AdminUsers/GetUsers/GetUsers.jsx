@@ -6,18 +6,20 @@ import { MdDriveFileRenameOutline } from "react-icons/md";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { FaCheckCircle } from "react-icons/fa";
 import { MdCancel } from "react-icons/md";
+import logo from "../../../assets/logo_completo.png";
 
 const GetUsers = () => {
   const [updatedUser, setUpdatedUser] = useState(null);
   const { users, setUsers } = useAuth();
   const [stores, setStores] = useState([]);
-  const [roles, setRoles] = useState([]);
+  const [roles, setRoles] = useState("");
 
   useEffect(() => {
     const fetchUsers = async () => {
       try {
         const response = await axios.get("/user");
         setUsers(response.data);
+        console.log(response.data);
       } catch (error) {
         console.error(error);
       }
@@ -48,9 +50,7 @@ const GetUsers = () => {
     };
     fetchStores();
   }, []);
-useEffect(() => {
-  
-}, [])
+  useEffect(() => {}, []);
 
   const handleUpdate = (id) => {
     const UserToUpdate = users.find((user) => user._id === id);
@@ -67,14 +67,12 @@ useEffect(() => {
 
   const handleSave = async () => {
     try {
-
       await axios.put(`user/${updatedUser._id}`, updatedUser);
       // Actualizar la lista de productos después de la actualización
       const response = await axios.get("/user");
       console.log(response.data);
       setUsers(response.data);
       setUpdatedUser(null); // Limpiar el estado de actualización después de guardar
-
     } catch (error) {
       console.log(error);
     }
@@ -98,6 +96,14 @@ useEffect(() => {
 
   return (
     <section className={styles.GetProducts}>
+      <div className={styles.usersHeader}>
+        <p className={styles.pheader}>foto</p>
+        <p className={styles.pheader}>nombre</p>
+        <p className={styles.pheader}>rol</p>
+        <p className={styles.pheader}>e-mail</p>
+        <p className={styles.pheader}>local</p>
+        <p className={styles.pheader}>actions</p>
+      </div>
       {users.map((user, i) => (
         <div
           key={user._id}
@@ -106,6 +112,12 @@ useEffect(() => {
           {updatedUser && updatedUser._id === user._id ? (
             // Renderizar campos de entrada si el producto está siendo actualizado
             <>
+              <div className={styles.photoDiv}>
+                <img
+                  className={styles.photo}
+                  src={user?.photo ? user.photo : logo}
+                />
+              </div>
               <input
                 type="text"
                 name="username"
@@ -116,13 +128,13 @@ useEffect(() => {
               <div className={styles.labelInput}>
                 <select
                   className={styles.updateProdInput}
-                  value={updatedUser.roles[0].id}
+                  value={updatedUser.roles._id}
                   onChange={handleChange}
                   name="roles"
                 >
                   {roles.map((role) => {
                     return (
-                      <option key={role.id} value={role._id}>
+                      <option key={role._id} value={role._id}>
                         {role.name}
                       </option>
                     );
@@ -170,11 +182,19 @@ useEffect(() => {
             </>
           ) : (
             // Mostrar el producto normal si no está siendo actualizado
+
             <>
-              <p>{user.username}</p>
-              <p>{user.roles[0].name}</p>
-              <p>{user.email}</p>
-              <p>{user.store.name}</p>
+              <div className={styles.photoDiv}>
+                <img
+                  className={styles.photo}
+                  src={user?.photo ? user.photo : logo}
+                />
+              </div>
+              <p className={styles.p}>{user.username}</p>
+              <p className={styles.p}>{user.roles.name}</p>
+              <p className={styles.p}>{user.email}</p>
+              <p className={styles.p}>{user.store.name}</p>
+
               <div className={styles.buttons}>
                 <button
                   className={`${styles.button} ${styles.update}`}

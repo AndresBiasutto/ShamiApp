@@ -20,7 +20,7 @@ const signIn = async (email, password) => {
    const response= {
      username: userFound.username,
      email: userFound.email,
-     roles: userFound.roles[0].name,
+     roles: userFound.roles.name,
      token: token,
      store: userFound.store
    }

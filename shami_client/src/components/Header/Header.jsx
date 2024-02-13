@@ -4,7 +4,7 @@ import { GoSignOut } from "react-icons/go";
 import useAuth from "../../hooks/useAuth";
 import styles from "./Header.module.css";
 import GoBack from "../GoBack/GoBack";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 const Header = () => {
@@ -48,7 +48,7 @@ const Header = () => {
             <p className={styles.p}>nombre: {name} </p>
             {store && <p className={styles.p}>tienda: {store.name} </p>}
             <p className={styles.p}>Rol: {role} </p>
-            <button className={styles.settings}>settings</button>
+            <Link to="usersettings" className={styles.settings}>settings</Link>
           </div>
 
           <button className={styles.button} onClick={handleLogout}>

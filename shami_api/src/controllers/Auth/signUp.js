@@ -18,12 +18,18 @@ const signUp = async (username, email, password, roles, store) => {
     store
   });
 
-  if (roles && roles.length > 0) {
-    const foundRoles = await Role.find({ name: { $in: roles } });
-    newUser.roles = foundRoles.map((role) => role._id);
+  if (roles) {
+    const foundRole = await Role.findById(roles); // Buscar el rol por su ID
+    if (!foundRole) {
+      return "Rol no encontrado";
+    }
+    newUser.roles = foundRole._id; // Asignar el ID del rol encontrado
   } else {
-    const role = await Role.findOne({ name: "user" });
-    newUser.roles = [role._id];
+    const defaultRole = await Role.findOne({ name: "user" });
+    if (!defaultRole) {
+      return "Rol predeterminado no encontrado";
+    }
+    newUser.roles = defaultRole._id;
   }
 
   const theUser = await newUser.save();

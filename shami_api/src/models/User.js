@@ -24,10 +24,10 @@ const UserSchema = new mongoose.Schema(
     contactNumber: {
       type: String,
     },
-    roles: [{
+    roles: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Role",
-    }],
+    },
     store: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Store"

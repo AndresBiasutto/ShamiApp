@@ -39,6 +39,7 @@ const Register = () => {
   const { setUsers } = useAuth();
 
   const [showModal, setsSowModal] = useState(false);
+  const [roles, setRoles] = useState([]);
 
   useEffect(() => {
     const fetchStores = async () => {
@@ -50,8 +51,17 @@ const Register = () => {
       }
     };
     fetchStores();
-
-    console.log(stores);
+  }, []);
+  useEffect(() => {
+    const fetchRoles = async () => {
+      try {
+        const response = await axios.get("/role");
+        setRoles(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchRoles();
   }, []);
 
   useEffect(() => {
@@ -68,8 +78,6 @@ const Register = () => {
 
   useEffect(() => {
     const result = USER_NAME_REGEX.test(userName);
-    console.log(result);
-    console.log(userName);
     setValidUserName(result);
   }, [userName]);
 
@@ -88,6 +96,7 @@ const Register = () => {
     try {
       const response = await axios.get("/user");
       setUsers(response.data);
+      console.log(response);
     } catch (error) {
       console.log(error);
     }
@@ -229,11 +238,15 @@ const Register = () => {
                   onChange={(e) => setRolSeleccionado(e.target.value)}
                 >
                   <option value="">Selecciona un rol</option>
-                  <option value="admin">Admin</option>
-                  <option value="factory">Factory</option>
-                  <option value="manager">Manager</option>
+                  {roles.map((role) => {
+                    return (
+                      <option key={role._id} value={role._id}>
+                        {role.name}
+                      </option>
+                    );
+                  })}
                 </select>
-                {/* <p>Rol seleccionado: {rolSeleccionado}</p> */}
+                {/* <p>Rol seleccionado: {localSeleccionado}</p> */}
               </div>
               <div className={styles.labelInput}>
                 <label>Selecciona un local:</label>
@@ -250,12 +263,7 @@ const Register = () => {
                       </option>
                     );
                   })}
-
-                  <option value="65971be06898691942bc07bd">
-                    Factory
-                  </option>
                 </select>
-                {/* <p>Rol seleccionado: {localSeleccionado}</p> */}
               </div>
               <div className={styles.labelInput}>
                 <label htmlFor="password">password</label>

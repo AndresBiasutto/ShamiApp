@@ -14,6 +14,7 @@ import AdminOrderControl from "./components/AdminOrderControl/AdminOrderControl"
 import AdminProducts from "./components/AdminProducts/AdminProducts";
 import CreateProduct from "./components/AdminProducts/CreateProduct/CreateProduct";
 import AdminUsers from "./components/AdminUsers/AdminUsers";
+import UserSettings from "./components/userSettings/UserSettings";
 
 function App() {
    const location= useLocation()
@@ -28,6 +29,8 @@ function App() {
         <Route path="login" element={<Login />} />
         <Route path="linkpage" element={<LinkPage />} />
         <Route path="unauthorized" element={<Unauthorized />} />
+        <Route path="usersettings" element={<UserSettings />} />
+        
 
         {/* Rutas protegidas */}
         <Route element={<RequireAuth allowedRoles={["admin"]} />}>

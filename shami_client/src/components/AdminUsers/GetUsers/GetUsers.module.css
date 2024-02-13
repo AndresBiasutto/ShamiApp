@@ -11,12 +11,27 @@
 }
 .user{
     display: grid;
-    grid-template-columns: 2fr 1fr 2fr 2fr 1fr;
+    grid-template-columns: .5fr 1fr 1fr 2fr 1fr 1fr;
     width: 100%;
-    padding-left: 10px;
 }
 .user:hover{
     border: 1px solid var(--blanco);
+}
+.photoDiv{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.photo{
+    height: 2em;
+    width: 2em;
+    object-fit: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100px;
+    
 }
 .buttons{
     display: flex;
@@ -40,6 +55,7 @@
     border-color: var(--rojo);
     font-size: 1.2em;
     padding: 0;
+    transition: all .3s ease-out;
 }
 .delete:hover{
 background-color: var(--rojo);
@@ -51,6 +67,7 @@ color: var(--blanco);
     border-color: var(--amarillo);
     font-size: 1.2em;
     padding: 0;
+    transition: all .3s ease-out;
 }
 .update:hover{
     background-color: var(--amarillo);
@@ -64,6 +81,7 @@ color: var(--blanco);
     padding: 0;
     height: 2em;
     width: 2em;
+    transition: all .3s ease-out;
 }
 .buttoncancel:hover{
     background-color: #fd5353;
@@ -77,6 +95,7 @@ color: var(--blanco);
     padding: 0;
     height: 2em;
     width: 2em;
+    transition: all .3s ease-out;
 }
 .buttoncheck:hover{
     background-color:#379e5d;
@@ -86,4 +105,19 @@ color: var(--blanco);
     background-color: var(--negro);
     color: var(--blanco);
     height: 100%;
+}
+.p{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+.usersHeader{
+    display: grid;
+    grid-template-columns: .5fr 1fr 1fr 2fr 1fr 1fr;
+    width: 100%;
+    padding-left: 10px;
+}
+.pheader{
+    font-weight: bold;
 }
